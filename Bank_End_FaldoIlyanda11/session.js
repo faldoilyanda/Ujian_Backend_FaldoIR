@@ -1,4 +1,3 @@
-// Penjelasan session
 
 var express = require('express');
 var bodyParser = require('body-parser')
@@ -24,7 +23,7 @@ app.get('/dua', function(req, res){
   sess=req.session;
 
   if(sess.contoh ==undefined){
-    res.redirect('/satu') // melempar ke arah mana
+    res.redirect('/satu')
   }
 
   console.log(sess.contoh)

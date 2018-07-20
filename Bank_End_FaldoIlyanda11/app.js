@@ -27,7 +27,7 @@
     port: '3307',
     user: 'root',
     password: 'usbw',
-    database: 'premium_birdnest'
+    database: 'ujian'
   });
 
   db.connect();
@@ -169,15 +169,10 @@
       res.send(result);
     });
   })
-  /////////////////////////end of invoice //////////////////////////////////
 
-
-  /////////////////////////////Product////////////////////////////////////
-
-  // untuk show all product
   app.get('/product', function (req, res) {
 
-    // // console.log(req.query.page)
+
 
     if (req.query.awal == 1) {
       var sql = 'SELECT * FROM `product` JOIN `category` ON product.category_id = category.id JOIN `condition` ON product.condition_id = condition.id JOIN `measure` ON product.Unit_measure_id = measure.id ORDER BY product.id_product DESC LIMIT 0,5';
@@ -187,7 +182,7 @@
       })
     }
 
-    // // Pagging nation for invoice
+
     else if (req.query.page != undefined) {
 
       var LIMIT = req.query.page
@@ -219,7 +214,7 @@
 
   })
 
-  // Untuk menampilkan product measure di add product dan dll
+
     app.get('/product/measure',function(req,res){
 
       var sql = 'SELECT * FROM `measure`';
@@ -230,7 +225,7 @@
   
     })
 
-  // Untuk menampilkan product condition di add product dan dll
+
     app.get('/product/condition',function(req,res){
 
       var sql = 'SELECT * FROM `condition`';
@@ -243,7 +238,7 @@
 
 
 
-  // Untuk add product
+
   app.post('/product/addproduct', function (req, res) {
 
     var data = {
@@ -263,7 +258,6 @@
     });
   })
 
-  // Show for ditel product (dalam halaman editproduct)
   app.post('/product/editproduct', function (req, res) {
 
     var id = req.body.id
@@ -274,7 +268,6 @@
     }); 
   })
 
-  // Edit product ditel
   app.post('/product/editproduct/update', function (req, res) {
 
 
@@ -299,7 +292,6 @@
 
   })
 
-  // Untuk add Picture for product
   app.post('/product/addproduct_pcr', function (req, res) {
 
     var userfile = req.files.file
@@ -315,7 +307,6 @@
       }
     );
 
-    // Insert into product image tbl
     var data = {
       product_id: req.body.id,
       product_images: namafileuniq + '.' + userfile.mimetype.split('/')[1]
@@ -327,7 +318,6 @@
     });
   })
 
-  // Untuk menghapus product (blm termasuk picture (tar cari yang picture sekalian untuk all))
   app.post('/product/delete', function (req, res) {
 
     var id = req.body.id
@@ -338,7 +328,6 @@
     });
   })
 
-  // menarik product dari table product
   app.post('/product/img', function (req, res) {
 
     var id = req.body.id
@@ -351,7 +340,6 @@
 
   })
 
-  // Hapus img product yang sudah pernah di upload
   app.post('/product/img/delete', function (req, res) {
     var nama = req.body.product_images
     var id = req.body.id
@@ -361,19 +349,13 @@
       console.log(result);
     });
 
-    // untuk update file dan menghapus file sebelumnya
     var fs = require('fs');
     var filePath = __dirname + '/image/' + nama
     fs.unlinkSync(filePath);
 
   })
 
-  ////////////////////////////End of product///////////////////////////// 
-
-
-////////////////////////// category product////////////////////
-
-  // Untuk add product category
+ 
   app.post('/product/addcategory', function (req, res) {
 
     var data = {
@@ -429,7 +411,6 @@
   })
 
 
-//////////////////////End Of Category Product///////////////////////////
 
   app.listen(3001);
 

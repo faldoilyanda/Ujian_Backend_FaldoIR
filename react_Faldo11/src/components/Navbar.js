@@ -26,7 +26,7 @@ class Navbar extends Component {
                 <span className="icon-bar" />
                 <span className="icon-bar" />
               </button>
-              <a className="navbar-brand" href="#">Bank Mr.Ade</a>
+              <a className="navbar-brand" href="#">PURWACENG</a>
             </div>
 
             {/* disini terdapat tombol log out */}

@@ -19,7 +19,6 @@ class FormEdit extends Component {
     birthday : "",
     statusRedirect: false
   }
-//   Untuk munculkan data yang mengandung id yg di tujuh di database
   componentDidMount(){
       var id = this.props.location.state.id;
         // console.log(id)

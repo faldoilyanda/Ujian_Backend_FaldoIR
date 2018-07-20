@@ -10,20 +10,15 @@ const secret = 'abcdefg';
 const fileUpload = require('express-fileupload');
 app.use(fileUpload());
 
-// include ini untuk bisa menampilkan semua file foto di public
 app.use(express.static(__dirname));
-///////////////////////////////////////////////////////////////
 
-// Untuk membuat unic id (permili second)
+
 var uniqid = require('uniqid');
-/////////////////////////////////////////////
 
 
-// untuk include cors (semua orang bisa akses)
 var cors = require('cors')
 app.use(cors());
 
-// boddy parser yang kita terima berbentuk jason dari react jadi harus di include
 app.use(bodyParser.json());
 
 
@@ -32,20 +27,16 @@ const db = mysql.createConnection({
   port: '3307',
   user: 'root',
   password: 'usbw',
-  database: 'bank_ade'
+  database: 'bank_faldo'
 });
 
 db.connect();
 
 
-///////////////////////// Star for user////////////////////// 
 
-//Login form
 
 app.post('/login', function (req, res) {
 
-  // console.log(req.body.username)
-  // console.log(req.body.password)
 
   var sql = `SELECT * FROM admin`;
   db.query(sql, (error, result) => {
@@ -71,25 +62,20 @@ app.post('/login', function (req, res) {
 
 app.post('/tambahcustomer', function (req, res) {
 
-  // console.log(req.body.gander)
-  // console.log(req.body.nama)
-  // console.log(req.body.rekening)
+
   var rekening = req.body.rekening
   var sql = `SELECT * FROM customer`;
   db.query(sql, (error, result) => {
     for (var i = 0; i < result.length; i++) {
       if (rekening == result[i].rekening) {
         var status = 'adasama';
-        // res.send(status)
         break;
       }
       else if (i === result.length - 1) {
         var status = 'tidaksama';
-        // varres.send(status)
       }
     }
 
-    // console.log(status);
     if (status != "adasama") {
 
       var data = {
@@ -126,8 +112,6 @@ app.post('/tambahcustomer', function (req, res) {
 
 app.get('/allviewcustomer', function (req, res) {
 
-  // console.log(req.body.username)
-  // console.log(req.body.password)
 
   var sql = `SELECT * FROM customer_ditel`;
   db.query(sql, (error, result) => {
@@ -135,24 +119,19 @@ app.get('/allviewcustomer', function (req, res) {
   });
 })
 
-// get data product ditel
 app.get('/getdata/:id', (req, res) => {
-  /** Menyiapkan query untuk ke MySQL */
   var grabData = `SELECT * FROM customer_ditel WHERE id = ${req.params.id}`;
 
   db.query(grabData, (err, hasilquery) => {
     if (err) {
-      /** Mengeluarkan pesan error apabila terjadi kesalahan */
       throw err;
     } else {
-      /** Menyiapkan hasil query untuk siap dikirim */
       res.send(hasilquery);
     }
   })
 });
 
-// Update data dari product ditel
-/** Untuk mengupdate data */
+
 app.post('/updatedata', (req, res) => {
 
 
@@ -172,9 +151,7 @@ app.post('/updatedata', (req, res) => {
 
 })
 
-//////////////////////////////////////////End of user///////////////////////////////////////////
 
-/////////////////// Start for user///////////////////////////
 app.post('/login_customer', function (req, res) {
 
   var sql = `SELECT * FROM customer`;
@@ -314,7 +291,7 @@ app.post('/kirim_rekening', (req, res) => {
 })
 
   
-////////////////////////////////// End for user ////////////////////////////
+
 
 app.listen(3002);
 
