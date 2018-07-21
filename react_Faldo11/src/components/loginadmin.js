@@ -49,12 +49,10 @@ class loginadmin extends Component {
 
   render() {
 
-    // Untuk user admin
     if(this.state.statusRedirect && this.props.login == 1){
       return <Redirect to="/adminlist"/>
     }    
 
-    // Untuk user admin
     if(this.state.statusRedirect && this.props.login_customer > 0){
       return <Redirect to="/customerlist"/>
     }    

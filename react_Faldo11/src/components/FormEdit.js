@@ -54,13 +54,11 @@ class FormEdit extends Component {
 
   render() {
 
-      // Mengecek apakah passwod sudah dan username uda benar?
   if(this.props.login != "1"){
     {this.state.redirect= true}  
     this.props.dispatch({type:'login', value:"Username /Password anda salah"});    
   }
 
-  // Mengirm redirect jika pass dan user bukan dapat value 1
     if (this.state.redirect) {
       return <Redirect to='/'/>
     }

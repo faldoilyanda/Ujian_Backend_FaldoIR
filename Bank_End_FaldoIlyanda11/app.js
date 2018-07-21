@@ -27,7 +27,7 @@
     port: '3307',
     user: 'root',
     password: 'usbw',
-    database: 'ujian'
+    database: 'bank_faldo'
   });
 
   db.connect();
@@ -52,7 +52,6 @@
       }
     });
 
-    // db.end();
   })
  
   app.get('/Contact', function (req, res) {
@@ -111,10 +110,8 @@
   )
 
 
-  ////////////////////////////invoice/////////////////////////////////////
-  // Untuk menampilkan invoice
+
   app.get('/invoice', function (req, res) {
-    // console.log(req.query.page)
     if (req.query.awal == 1) {
       var sql = 'SELECT * FROM invoice LIMIT 0,5';
       db.query(sql, (err, result) => {
@@ -123,7 +120,6 @@
       })
     }
 
-    // Pagging nation for invoice
     else if (req.query.page != undefined) {
 
       var LIMIT = req.query.page
@@ -144,7 +140,6 @@
     }
   })
 
-  // Untuk update status invoice
   app.post('/invoice/update', function (req, res) {
 
 
@@ -159,7 +154,6 @@
     });
   })
 
-  // Untuk cage invoice ditel
   app.post('/order_ditel', function (req, res) {
 
     var invoice_number = req.body.invoice_number;
@@ -203,7 +197,6 @@
     }
   })
 
-  // Untuk menampilkan product category di add product dan dll
   app.get('/product/show_category',function(req,res){
 
     var sql = 'SELECT * FROM `category`';
@@ -369,10 +362,8 @@
     });
   })
 
-  // Untuk delete product category
   app.post('/product/category/delete', function (req, res) {
 
-    // console.log(id)
     
     var id= req.body.id
     var sql = 'DELETE FROM `category` WHERE id =?';
@@ -382,7 +373,6 @@
     });
   })
 
-  // Untuk show product category yang dipilih
   app.post('/product/show_categorybyid', function (req, res) {
 
     var id = req.body.id    
@@ -394,10 +384,8 @@
 
   })
 
-   // Untuk show product category yang dipilih
    app.post('/product/category/edit', function (req, res) {
-    // console.log(req.body.id)
-    // console.log(req.body.nama_category)
+
 
     var id = req.body.id;
     var nama_category = req.body.nama_category;

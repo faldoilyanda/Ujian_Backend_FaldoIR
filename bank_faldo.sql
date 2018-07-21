@@ -1,26 +1,26 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4.2
--- http://www.phpmyadmin.net
+-- version 4.8.0.1
+-- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 20, 2018 at 10:59 AM
--- Server version: 5.6.13
--- PHP Version: 5.4.17
+-- Generation Time: Jul 21, 2018 at 04:49 AM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 7.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bank_ade`
+-- Database: `bank_faldo`
 --
-CREATE DATABASE IF NOT EXISTS `bank_faldo` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `bank_faldo`;
 
 -- --------------------------------------------------------
 
@@ -28,19 +28,18 @@ USE `bank_faldo`;
 -- Table structure for table `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
   `username` varchar(300) NOT NULL,
-  `password` varchar(300) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `password` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`) VALUES
-(1, 'ade', '123');
+(1, 'faldo', '123');
 
 -- --------------------------------------------------------
 
@@ -48,12 +47,11 @@ INSERT INTO `admin` (`id`, `username`, `password`) VALUES
 -- Table structure for table `customer`
 --
 
-CREATE TABLE IF NOT EXISTS `customer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `customer` (
+  `id` int(11) NOT NULL,
   `rekening` int(11) NOT NULL,
-  `kode_pin` varchar(300) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `kode_pin` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer`
@@ -69,25 +67,24 @@ INSERT INTO `customer` (`id`, `rekening`, `kode_pin`) VALUES
 -- Table structure for table `customer_ditel`
 --
 
-CREATE TABLE IF NOT EXISTS `customer_ditel` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `customer_ditel` (
+  `id` int(11) NOT NULL,
   `nama` varchar(300) NOT NULL,
   `email` varchar(300) NOT NULL,
   `alamat` varchar(300) NOT NULL,
   `nomor_hp` varchar(300) NOT NULL,
   `gander` varchar(300) NOT NULL,
   `saldo` int(200) NOT NULL,
-  `birthday` varchar(300) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `birthday` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer_ditel`
 --
 
 INSERT INTO `customer_ditel` (`id`, `nama`, `email`, `alamat`, `nomor_hp`, `gander`, `saldo`, `birthday`) VALUES
-(1, 'amat123', 'shu@gmail.com', 'jl.antara', '0812383838', 'pria', 6594602, '12-02-11'),
-(4, 'babang', 'babang@gmail.com', 'alamat aja', '0812345678', 'pria', 1504767, '12-12-1990');
+(1, 'raton', 'raton@gmail.com', 'jl kaki', '0812383838', 'pria', 6594602, '12-02-11'),
+(4, 'esa', 'esa@gmail.com', 'jl sender', '0812345678', 'pria', 1504767, '12-12-1990');
 
 -- --------------------------------------------------------
 
@@ -95,13 +92,12 @@ INSERT INTO `customer_ditel` (`id`, `nama`, `email`, `alamat`, `nomor_hp`, `gand
 -- Table structure for table `history_stortunai`
 --
 
-CREATE TABLE IF NOT EXISTS `history_stortunai` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `history_stortunai` (
+  `id` int(11) NOT NULL,
   `id_customer` int(11) NOT NULL,
   `jumlah_stor` varchar(300) NOT NULL,
-  `waktu_distor` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+  `waktu_distor` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `history_stortunai`
@@ -124,14 +120,13 @@ INSERT INTO `history_stortunai` (`id`, `id_customer`, `jumlah_stor`, `waktu_dist
 -- Table structure for table `history_transfer`
 --
 
-CREATE TABLE IF NOT EXISTS `history_transfer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `history_transfer` (
+  `id` int(11) NOT NULL,
   `id_customer` int(11) NOT NULL,
   `kerekening` varchar(300) NOT NULL,
   `jumlah_transfer` varchar(200) NOT NULL,
-  `waktu_distransfer` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+  `waktu_distransfer` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `history_transfer`
@@ -152,6 +147,75 @@ INSERT INTO `history_transfer` (`id`, `id_customer`, `kerekening`, `jumlah_trans
 (12, 4, '12345', '1233', '2018-07-20 10:22:36'),
 (13, 4, '12345', '123', '2018-07-20 10:22:53'),
 (14, 4, '12345', '600000', '2018-07-20 10:25:48');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customer_ditel`
+--
+ALTER TABLE `customer_ditel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `history_stortunai`
+--
+ALTER TABLE `history_stortunai`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `history_transfer`
+--
+ALTER TABLE `history_transfer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `customer_ditel`
+--
+ALTER TABLE `customer_ditel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `history_stortunai`
+--
+ALTER TABLE `history_stortunai`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `history_transfer`
+--
+ALTER TABLE `history_transfer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

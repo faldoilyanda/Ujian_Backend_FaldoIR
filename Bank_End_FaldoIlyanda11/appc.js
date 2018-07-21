@@ -166,11 +166,9 @@ app.post('/login_customer', function (req, res) {
         if (rekening == result[i].rekening && kode_pin == result[i].kode_pin) {
           tampung.push(result[i].id)
           res.send(tampung);
-          // console.log(status)
           break;
         } else if (i === result.length - 1) {
           res.send(tampung);
-          // console.log(status)
         }
       }
     }
@@ -186,7 +184,6 @@ app.post('/viewcustomer', function (req, res) {
 })
 
 
-// Untuk update saldo 
 app.post('/update_saldo', (req, res) => {
 
   var id = req.body.id
@@ -219,7 +216,6 @@ app.post('/update_saldo', (req, res) => {
 
 
 
-// Untuk update saldo 
 app.post('/kirim_rekening', (req, res) => {
 
   var id = req.body.id
@@ -232,11 +228,9 @@ app.post('/kirim_rekening', (req, res) => {
     for (var i = 0; i < result.length; i++) {
       if (kerekening == result[i].rekening) {
         var status = "ada"
-        // console.log(status)
         break;
       } else if (i === result.length - 1) {
         var status = "tidakada"
-        // console.log(status)
       }
     }
 
